@@ -82,9 +82,10 @@ function create() {
     player.body.velocity.y=-50;
     player.body.velocity.x=0;
     player.body.gravity.y=200;
-    player.scale.setTo(0.75, 0.75);
+    player.scale.setTo(0.5, 0.5);
     pipes = game.add.group();
     game.time.events.loop(2*Phaser.Timer.SECOND, generate_pipes);
+
 
 }
 
@@ -110,11 +111,9 @@ function player_jump(){
     player.body.velocity.y=-120;
 
 }
-
 function moveLeft(){
     player.x -= step;
 }
-
 function moveRight(){
     player.x += step;
 }
@@ -122,7 +121,6 @@ function moveRight(){
 function moveUp(){
     player.y -= step;
 }
-
 function moveDown(){
     player.y += step;
 }
@@ -131,7 +129,6 @@ function clickHandler(event){
 
     game.add.sprite(event.x,event.y,"playerImg");
 }
-
 
 function spaceHandler(){
     game.sound.play("score");
@@ -143,5 +140,10 @@ function spaceHandler(){
  * This function updates the scene. It is called for every new frame.
  */
 function update() {
+game.physics.arcade.overlap(player,pipes, game_over);
 
+}
+
+function game_over(){
+    location.reload();
 }
